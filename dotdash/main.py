@@ -47,3 +47,11 @@ def encoding(text: str, morse_dict: dict = char2morse):
         word_morse = " ".join([morse_dict[letter] for letter in word])
         output += f"{word_morse}   "
     return output.rstrip()
+
+
+def decoding(code: str, morse_dict: dict = morse2char):
+    output = ""
+    for word_morse in code.split("   "):
+        word = "".join([morse_dict[letter] for letter in word_morse.split()])
+        output += f"{word} "
+    return output.rstrip().lower()
