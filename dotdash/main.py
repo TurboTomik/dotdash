@@ -40,7 +40,24 @@ char2morse = {
 morse2char = {morse: char for char, morse in char2morse.items()}
 
 
-def encoding(text: str, morse_dict: dict = char2morse):
+def encoding(text: str, morse_dict: dict = char2morse) -> str:
+    """
+    Converts a given Latin alphabet text into Morse code.
+
+    Args:
+        text (str): The text to be converted into Morse code.
+                    Only letters and numbers are supported; input is case-insensitive.
+        morse_dict (dict, optional): A dictionary mapping each Latin character
+                                     to its corresponding Morse code symbol. Defaults to `char2morse`.
+
+    Returns:
+        str: The Morse code translation of the input text, with each letter separated by a
+             single space and each word separated by three spaces.
+
+    Example:
+        >>> encoding("Hello World")
+        '.... . .-.. .-.. ---   .-- --- .-. .-.. -..'
+    """
     text = text.upper()
     output = ""
     for word in text.split():
@@ -49,7 +66,25 @@ def encoding(text: str, morse_dict: dict = char2morse):
     return output.rstrip()
 
 
-def decoding(code: str, morse_dict: dict = morse2char):
+def decoding(code: str, morse_dict: dict = morse2char) -> str:
+    """
+    Converts a given Morse code string into Latin alphabet text.
+
+    Args:
+        code (str): The Morse code to be converted, where each letter in Morse code
+                    is separated by a single space, and each word is separated by
+                    three spaces.
+        morse_dict (dict, optional): A dictionary mapping Morse code symbols
+                                     to their corresponding Latin characters.
+                                     Defaults to `morse2char`.
+
+    Returns:
+        str: The decoded Latin text in lowercase.
+
+    Example:
+        >>> decoding(".... . .-.. .-.. ---   .-- --- .-. .-.. -..")
+        'hello world'
+    """
     output = ""
     for word_morse in code.split("   "):
         word = "".join([morse_dict[letter] for letter in word_morse.split()])
