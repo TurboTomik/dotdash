@@ -38,3 +38,12 @@ char2morse = {
 }
 
 morse2char = {morse: char for char, morse in char2morse.items()}
+
+
+def encoding(text: str, morse_dict: dict = char2morse):
+    text = text.upper()
+    output = ""
+    for word in text.split():
+        word_morse = " ".join([morse_dict[letter] for letter in word])
+        output += f"{word_morse}   "
+    return output.rstrip()
