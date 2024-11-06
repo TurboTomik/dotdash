@@ -90,3 +90,17 @@ def decoding(code: str, morse_dict: dict = morse2char) -> str:
         word = "".join([morse_dict[letter] for letter in word_morse.split()])
         output += f"{word} "
     return output.rstrip().lower()
+
+
+if __name__ == "__main__":
+
+    def user_input():
+        text = input("Enter text or morse code: ")
+        is_morse = all(char in ".- " for char in text)
+        if is_morse:
+            print(f'From morse to text "{decoding(text)}"')
+        else:
+            print(f"From text to morse ({encoding(text)})")
+
+    while True:
+        user_input()
