@@ -45,7 +45,7 @@ def is_morse_code(text: str) -> bool:
     return all(char in ".- " for char in text)
 
 
-def join_word(letters: list, morse_dict: dict, strict: bool, space: str) -> str:
+def _join_word(letters: list, morse_dict: dict, strict: bool, space: str) -> str:
     """Helper function to join Morse code letters or decode Morse code symbols."""
     if strict:
         return space.join([morse_dict[letter] for letter in letters])
@@ -80,7 +80,7 @@ def encoding(text: str, strict: bool = False, morse_dict: dict = char2morse) -> 
     text = text.upper()
     output = ""
     for word in text.split():
-        word_morse = join_word(word, morse_dict, strict, space=" ")
+        word_morse = _join_word(word, morse_dict, strict, space=" ")
         output += f"{word_morse}   "
     return output.rstrip()
 
@@ -110,12 +110,12 @@ def decoding(code: str, strict: bool = False, morse_dict: dict = morse2char) -> 
     """
     output = ""
     for word_morse in code.split("   "):
-        word = join_word(word_morse.split(), morse_dict, strict, space='')
+        word = _join_word(word_morse.split(), morse_dict, strict, space='')
         output += f"{word} "
     return output.rstrip().lower()
 
 
-def user_input():
+def _user_input():
     """Handles user input, detects Morse code or text, and prints the result."""
     text = input("Enter text or morse code (type 'exit' to quit): ")
 
@@ -133,5 +133,5 @@ def user_input():
 
 if __name__ == "__main__":
     while True:
-        if not user_input():
+        if not _user_input():
             break
